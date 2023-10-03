@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+*.tif
+
+LRBL_SCALED.tif.aux.xml
+
+*.ovr
