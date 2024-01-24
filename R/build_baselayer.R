@@ -35,8 +35,8 @@ LR_READY <- lapply(layers_to_scale, normalize)
 
 # Landscape Resilience Equation
 LR <- (
-    (LR_READY[[1]]  * 1) # + kba
-  + (LR_READY[[2]] * 1)  # + ch
+  #  (LR_READY[[1]]  * 1) # + kba <-- removing kbas from resilience equation
+    (LR_READY[[2]] * 1)  # + ch
   + (LR_READY[[3]] * 1)  # + biod_goal
   + (LR_READY[[4]] * 1)  # + end_goal
   + (LR_READY[[5]] * 1)  # + sar_goal
@@ -51,14 +51,14 @@ LR <- (
   + (LR_READY[[14]] * 1) # + wet
   + (LR_READY[[15]] * 1) # + river
   + (LR_READY[[16]] * 1) # + shore
-  + (LR_READY[[17]] * 1) # + parks
+  # + (LR_READY[[17]] * 1) # + parks <-- removing parks from resilience equation
   - (LR_READY[[18]] * 1) # - climate_e
   - (LR_READY[[19]] * 1) # - hfi
 )
 
 # Write Landscape Resilience Baselayer to disk
-writeRaster(LR, "LRBL.tif", overwrite = TRUE)
-writeRaster(normalize(LR), "LRBL_SCALED.tif", overwrite = TRUE)
+writeRaster(LR, "LandR.tif", overwrite = TRUE)
+writeRaster(normalize(LR), "LANDR_SCALED.tif", overwrite = TRUE)
 
 # End timer
 end_time <- Sys.time()
