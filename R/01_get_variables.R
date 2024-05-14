@@ -1,7 +1,7 @@
 #
 # Author: Dan Wismer
 #
-# Date: May 13th, 2022
+# Date: May 13th, 2024
 #
 # Description: Imports national 1km raster .tifs. Layers are held in-memory and
 #              used to calculate landscape resilience. 
