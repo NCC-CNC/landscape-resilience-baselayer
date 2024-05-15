@@ -53,6 +53,7 @@ LR_READY <- lapply(layers_to_scale, function(x) {
     }
   }
   x <- normalize(x)           # normalize
+  x <- round(x, 2)            # round to 2 decimal places
   mosaic(x, PU, fun="max")    # mosaic so raster is between 0-1
 })
 
