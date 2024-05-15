@@ -48,12 +48,10 @@ LR_RAW <- c(
 
 # Convert 0 to NA and mask to LR
 LR_RAW <- lapply(LR_RAW, function(x) {
-  if(names(x) == "climate_e") {
-    r <- x # climate_e ranges between -0.0153367 to 0.0256083
-  } else {
-    r <- ifel(x <= 0, NA, x) 
-  }
-  mask(r, LR)
+  if(names(x) != "climate_e") { # climate_e ranges between -0.0153367 to 0.0256083
+    x <- ifel(x <= 0, NA, x)
+  } 
+  mask(x, LR)
 })
 
 # Save layers to disk
