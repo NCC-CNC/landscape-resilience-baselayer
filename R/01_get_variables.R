@@ -12,8 +12,6 @@
 #
 #===============================================================================
 
-# THIS SCRIPT GETS RAN IN 02_build_baselayer.R
-
 library(terra)
 
 # Set path 

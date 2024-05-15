@@ -17,8 +17,7 @@ library(terra)
 # Start timer
 start_time <- Sys.time()
 
-# Source script and function
-source("R/01_get_variables.R")
+# Source function
 source("R/fct_normalize.R")
 
 # Get input layers
