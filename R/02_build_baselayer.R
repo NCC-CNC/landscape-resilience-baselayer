@@ -3,7 +3,8 @@
 #
 # Date: May 13th, 2024
 #
-# Description: Generates landscape resilience.
+# Description: Normalizes variables and generate Landscape Resilience. Goal and
+#              rivers variable is truncated at the 3rd Q to control for outliers.
 #
 # Inputs:  1. 01_get_variables.R
 #
@@ -42,7 +43,18 @@ layers_to_scale <- c(
 )
 
 # Scale layers between 0 and 1
-LR_READY <- lapply(layers_to_scale, normalize)
+LR_READY <- lapply(layers_to_scale, function(x) {
+  print(names(x))
+  if (names(x) != "climate_e") {
+    x <- ifel(x <= 0, NA, x) # remove 0's 
+    if (names(x) %in% c("biod_goal", "end_goal", "sar_goal", "rivers")) {
+      third_q <- global(x, quantile, probs=c(0.75), na.rm=TRUE)[[1]]
+      x[x > third_q] <- third_q # truncate layer at third Q (control outliers)
+    }
+  }
+  x <- normalize(x)           # normalize
+  mosaic(x, PU, fun="max")    # mosaic so raster is between 0-1
+})
 
 # Landscape Resilience positive variables
 LR_POS <- (
@@ -73,8 +85,6 @@ LR_NEG <- (
 LR <- LR_POS - LR_NEG
 
 # Write Landscape Resilience to disk
-writeRaster(LR_POS, "Output/LandR_POS.tif", overwrite = TRUE)
-writeRaster(LR_NEG, "Output/LandR_NEG.tif", overwrite = TRUE)
 writeRaster(LR, "Output/LandR.tif", overwrite = TRUE)
 
 # End timer
