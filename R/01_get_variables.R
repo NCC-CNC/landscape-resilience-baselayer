@@ -16,102 +16,102 @@
 
 library(terra)
 
-# Set path ----
+# Set path 
 WTW_DATA <- "C:/Data/PRZ/WTW_DATA/WTW_NAT_DATA_20240124"
+
 # Get NCC PU
 PU <- rast(file.path(WTW_DATA, "nat_pu", "NCC_1KM_PU.tif"))
 PU[PU==1] <- 0
 
-## critical habitat
+# Critical Habitat
 ch <- rast(file.path(WTW_DATA, "biodiversity", "ECCC_CH_ALL_HA_SUM.tif"))
-ch <- mosaic(ch, PU, fun = "max")
 names(ch) <- "ch"
 
-## goals
-### biodiversity species goal
+# Biodiversity Species Goal
 biod_goal <- rast(file.path(WTW_DATA, "biodiversity", "goals", "BOID_SUM_GOAL.tif"))
-biod_goal <- mosaic(biod_goal, PU, fun = "max")
 names(biod_goal) <- "biod_goal"
 
-### endemic species goal
+# Endemic Species Goal
 end_goal <- rast(file.path(WTW_DATA, "biodiversity", "goals", "NSC_END_SUM_GOAL.tif"))
-end_goal <- mosaic(end_goal, PU, fun = "max")
 names(end_goal) <- "end_goal"
 
-### species at risk goal
+# Species at Risk Goal
 sar_goal <- rast(file.path(WTW_DATA, "biodiversity", "goals", "ECCC_SAR_SUM_GOAL.tif"))
-sar_goal <- mosaic(sar_goal, PU, fun = "max")
 names(sar_goal) <- "sar_goal"
 
-## richness
-### biodiversity species richness
+# Biodiversity Species Richness
 biod_rich <- rast(file.path(WTW_DATA, "biodiversity", "richness", "BOID_COUNT.tif"))
-biod_rich <- mosaic(biod_rich, PU, fun = "max")
 names(biod_rich) <- "biod_rich"
 
-### endemic species richness
+# Endemic Species Richness
 end_rich <- rast(file.path(WTW_DATA, "biodiversity", "richness", "NSC_END_COUNT.tif"))
-end_rich <- mosaic(end_rich, PU, fun = "max")
 names(end_rich) <- "end_rich"
 
-### species at risk richness
+# Species at Risk Richness
 sar_rich <- rast(file.path(WTW_DATA, "biodiversity", "richness", "ECCC_SAR_COUNT.tif"))
-sar_rich <- mosaic(sar_rich, PU, fun = "max")
 names(sar_rich) <- "sar_rich"
 
-# Get Connectivity Data ----
-## connectivity
+# Connectivity
 connect <- rast(file.path(WTW_DATA, "connectivity", "Connectivity_Pither_Current_Density.tif"))
-connect <- mosaic(connect, PU, fun = "max")
 names(connect) <- "connect"
 
-# Get Climate Data ----
-## centrality
+# Climate centrality
 climate_c <- rast(file.path(WTW_DATA, "climate", "Climate_FwdShortestPath_2080_RCP85.tif"))
-climate_c <- mosaic(climate_c, PU, fun = "max")
 names(climate_c) <- "climate_c"
 
-## extremes
+# Climate Extremes
 climate_e <- rast(file.path(WTW_DATA, "climate", "Climate_LaSorte_ExtremeHeatEvents.tif"))
-climate_e <- mosaic(climate_e, PU, fun = "max")
 names(climate_e) <- "climate_e"
 
-## refugia
+# Climate Refugia
 climate_r <- rast(file.path(WTW_DATA, "climate", "Climate_Refugia_2080_RCP85.tif"))
-climate_r <- mosaic(climate_r, PU, fun = "max")
 names(climate_r) <- "climate_r"
 
-# Get Habitat Data ----
-## forest landcover
+# Forest land cover
 forest <- rast(file.path(WTW_DATA, "habitat", "FOREST_LC_COMPOSITE_1KM.tif"))
-forest <- mosaic(forest, PU, fun = "max")
 names(forest) <- "forest"
 
-## grassland
+# Grassland
 grass <- rast(file.path(WTW_DATA, "habitat", "Grassland_AAFC_LUTS_Total_Percent.tif"))
-grass <- mosaic(grass, PU, fun = "max")
 names(grass) <- "grass"
 
-## wetland
+# Wetland
 wet <- rast(file.path(WTW_DATA, "habitat", "Wetland_comb_proj_diss_90m_Arc.tif"))
-wet <- round(wet,2) # original data has a min of 0.00111111,
-wet <- mosaic(wet, PU, fun = "max")
+wet <- round(wet,2) # easier to work with, original data has a min of 0.00111111,
 names(wet) <- "wet"
 
-## rivers
+# Rivers
 river <- rast(file.path(WTW_DATA, "habitat", "grid_1km_water_linear_flow_length_1km.tif"))
-river <- round(river, 2)
-river[river > 50] <- 50 # truncate to 3rd Q
-river <- mosaic(river, PU, fun = "max")
+river <- round(river, 2) # easier to work with
 names(river) <- "river"
 
-## shoreline
+# Shoreline
 shore <- rast(file.path(WTW_DATA, "habitat", "Shoreline.tif"))
-shore <- mosaic(shore, PU, fun = "max")
 names(shore) <- "shore"
 
-# Get Threat Data ----
-## human footprint index
+# Human Footprint Index
 hfi <- rast(file.path(WTW_DATA, "threats", "CDN_HF_cum_threat_20221031_NoData.tif"))
-hfi <- mosaic(hfi, PU, fun = "max")
 names(hfi) <- "hfi"
+
+# NON LR Variables -------------------------------------------------------------
+
+# Carbon Potential
+carbon_p <- rast(file.path(WTW_DATA, "carbon", "Carbon_Potential_NFI_2011_CO2e_t_year.tif"))
+names(carbon_p) <- "carbon_p"
+
+# Carbon Storage
+carbon_s <- rast(file.path(WTW_DATA, "carbon", "Carbon_Mitchell_2021_t.tif"))
+names(carbon_s) <- "carbon_s"
+
+# Existing Conservation
+parks <- rast(file.path(WTW_DATA, "protection", "CPCAD_NCC_FS_CA_HA.tif"))
+terra::NAflag(parks) <- 128
+names(parks) <- "parks"
+
+# Recreation
+rec <- rast(file.path(WTW_DATA, "eservices", "rec_pro_1a_norm.tif"))
+names(rec) <- "rec"
+
+# Freshwater Provision
+freshw <- rast(file.path(WTW_DATA, "eservices", "water_provision_2a_norm.tif"))
+names(freshw) <- "freshw"
