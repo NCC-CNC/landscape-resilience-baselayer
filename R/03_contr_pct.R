@@ -3,7 +3,8 @@
 #
 # Date: May 13th, 2024
 #
-# Description: Generates the contribution % of each variable.
+# Description: Generates the contribution % of each variable to the absolute 
+#              Landscape Resilience.
 #
 # Inputs:  1. run 01_get_variables.R
 #          2. run 02_build_baselayer.R
@@ -16,29 +17,27 @@
 
 # Contribution percentage function
 contribution_pct <- function(normalized_var_rast, LR_sum_rast) {
-  cpct <- round(abs((normalized_var_rast / LR_sum_rast) * 100),2)
+  cpct <- round(((normalized_var_rast / LR_sum_rast) * 100),2)
   return(cpct)
 }
 
-# Calculate contribution percentage (positive variables)
-CONTR_PCT_POS <- lapply(LR_READY[1:15], function(x){
-  return(contribution_pct(x, LR))
-})
+# Get absolute LR 
+LR_ABS <- LR_POS + abs(LR_NEG)
 
-# Calculate contribution percentage (positive variables)
-CONTR_PCT_NEG <- lapply(LR_READY[16:17], function(x){
-  browser()
-  return(contribution_pct(x, LR_NEG))
+# Calculate contribution percentage of each variable to the absolute LR
+CONTR_PCT <- lapply(LR_READY, function(x){
+  print(names(x))
+  return(contribution_pct(x, LR_ABS))
 })
-
-# Merge lists 
-CONTR_PCT <- c(CONTR_PCT_POS, CONTR_PCT_NEG)
 
 # Save layers to disk
 for (i in seq_along(CONTR_PCT)) {
+  print(names(CONTR_PCT[[i]]))
+  r <- ifel(CONTR_PCT[[i]] <= 0, NA, CONTR_PCT[[i]])
   writeRaster(
-    CONTR_PCT[[i]], 
-    paste0("Output/contr_pct/", names(CONTR_PCT[[i]]), ".tif"), 
+    r, 
+    paste0("Output/contr_pct/", names(CONTR_PCT[[i]]), "_pct.tif"), 
     overwrite = TRUE
   )
 }
+
