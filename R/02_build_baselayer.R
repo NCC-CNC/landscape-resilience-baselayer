@@ -32,7 +32,7 @@ layers_to_scale <- c(
   connect,         # connectivity 
   climate_c,       # climate centrality
   climate_r,       # climate refugia
-  forest,          # forest land cover, ha
+  forest_lc,       # forest land cover, ha
   grass,           # grassland, ha
   wet,             # wetland, ha  
   river,           # rivers, km
@@ -68,7 +68,7 @@ LR_POS <- (
   + (LR_READY[[8]] * 1)  # connect
   + (LR_READY[[9]] * 1)  # climate_c
   + (LR_READY[[10]] * 1) # climate_r
-  + (LR_READY[[11]] * 1) # forest
+  + (LR_READY[[11]] * 1) # forest_lc
   + (LR_READY[[12]] * 1) # grass
   + (LR_READY[[13]] * 1) # wet
   + (LR_READY[[14]] * 1) # river

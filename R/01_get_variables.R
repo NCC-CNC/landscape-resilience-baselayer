@@ -66,8 +66,8 @@ climate_r <- rast(file.path(WTW_DATA, "climate", "Climate_Refugia_2080_RCP85.tif
 names(climate_r) <- "climate_r"
 
 # Forest land cover
-forest <- rast(file.path(WTW_DATA, "habitat", "FOREST_LC_COMPOSITE_1KM.tif"))
-names(forest) <- "forest"
+forest_lc <- rast(file.path(WTW_DATA, "habitat", "FOREST_LC_COMPOSITE_1KM.tif"))
+names(forest_lc) <- "forest_lc"
 
 # Grassland
 grass <- rast(file.path(WTW_DATA, "habitat", "Grassland_AAFC_LUTS_Total_Percent.tif"))
@@ -113,3 +113,11 @@ names(rec) <- "rec"
 # Freshwater Provision
 freshw <- rast(file.path(WTW_DATA, "eservices", "water_provision_2a_norm.tif"))
 names(freshw) <- "freshw"
+
+# Lakes
+lakes <- rast(file.path(WTW_DATA, "habitat", "Lakes_CanVec_50k_ha.tif"))
+names(lakes) <- "lakes"
+
+# Forest land use
+forest_lu <- rast(file.path(WTW_DATA, "habitat", "FOREST_LU_COMPOSITE_1KM.tif"))
+names(forest_lu) <- "forest_lu"

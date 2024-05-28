@@ -36,14 +36,17 @@ LR_RAW <- c(
   "climate_e" = climate_e,
   "claimte_r" = climate_r,
   "connect" = connect,
-   "forest" = forest,
+  "forest_lc" = forest_lc,
+  "forest_lu" = forest_lu,
   "grass" = grass,
   "wet" = wet,
   "shore" = shore,
   "river" = river,
   "hfi" = hfi,
   "rec" = rec,
-  "parks" = parks
+  "parks" = parks,
+  "freshw" = freshw,
+  "lakes" = lakes
   )
 
 # Convert 0 to NA and mask to LR
