@@ -15,7 +15,7 @@
 library(terra)
 
 # Set path 
-WTW_DATA <- "C:/Data/PRZ/WTW_DATA/WTW_NAT_DATA_20240124"
+WTW_DATA <- "C:/Data/PRZ/WTW_DATA/WTW_NAT_DATA_20240522"
 
 # Get NCC PU
 PU <- rast(file.path(WTW_DATA, "nat_pu", "NCC_1KM_PU.tif"))

@@ -27,6 +27,7 @@ for (i in seq_along(LR_READY_EXPORT)) {
 
 # Raw layers for impact metrics
 LR_RAW <- c(
+  "ch" = ch,
   "biod_rich" = biod_rich, 
   "end_rich" = end_rich, 
   "sar_rich" = sar_rich,
