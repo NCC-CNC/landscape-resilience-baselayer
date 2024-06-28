@@ -85,7 +85,7 @@ LR_NEG <- (
 LR <- LR_POS - LR_NEG
 
 # Write Landscape Resilience to disk
-writeRaster(LR, "Output/LandR.tif", overwrite = TRUE)
+writeRaster(LR, "Output/landr.tif", overwrite = TRUE)
 
 # End timer
 end_time <- Sys.time()
