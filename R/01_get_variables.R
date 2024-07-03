@@ -117,5 +117,5 @@ lakes <- rast(file.path(NAT_1KM, "habitat", "lakes.tif"))
 names(lakes) <- "lakes"
 
 # Forest land use
-forest_lu <- rast(file.path(NAT_1KM, "habitat", "forest_lc.tif"))
+forest_lu <- rast(file.path(NAT_1KM, "habitat", "forest_lu.tif"))
 names(forest_lu) <- "forest_lu"
