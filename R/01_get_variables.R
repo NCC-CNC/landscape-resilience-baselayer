@@ -8,14 +8,14 @@
 #
 # Inputs:  1. NAT_1KM folder
 #
-# Tested on R Versions: 4.3.0
+# Tested on R Versions: 4.4.1
 #
 #===============================================================================
 
 library(terra)
 
 # Set path 
-NAT_1KM <- "C:/Data/PRZ/NAT_DATA/NAT_1KM_20240626"
+NAT_1KM <- "C:/Data/PRZ/NAT_DATA/NAT_1KM_20240729"
 
 # Get NCC PU
 PU <- rast(file.path(NAT_1KM, "_1km", "const.tif"))
@@ -115,7 +115,3 @@ names(freshw) <- "freshw"
 # Lakes
 lakes <- rast(file.path(NAT_1KM, "habitat", "lakes.tif"))
 names(lakes) <- "lakes"
-
-# Forest land use
-forest_lu <- rast(file.path(NAT_1KM, "habitat", "forest_lu.tif"))
-names(forest_lu) <- "forest_lu"
